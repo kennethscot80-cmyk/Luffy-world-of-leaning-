@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUFFY FFX — Learn. Watch Ads. Earn GH₵!</title>
+<link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Nunito:wght@400;600;700;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#FFD700;--gold2:#FFA500;--dark:#060918;--navy:#0A0E2A;
+  --accent:#00E5FF;--pink:#FF4FCB;--green:#00FF99;--red:#FF4444;
+  --card:#0F1535;--border:rgba(255,215,0,0.18);--text:#EEF0FF;--muted:#8890BB;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden}
+
+/* ── STARS ── */
+#stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.star{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d,3s) infinite alternate;opacity:0}
+@keyframes twinkle{from{opacity:0;transform:scale(.8)}to{opacity:var(--o,.8);transform:scale(1.2)}}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;width:100%;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:11px 26px;background:rgba(6,9,24,.94);backdrop-filter:blur(20px);border-bottom:1.5px solid var(--border)}
+.logo{font-family:'Orbitron',sans-serif;font-size:1.45rem;font-weight:900;color:var(--gold);letter-spacing:2px;text-shadow:0 0 16px #ffd70066}
+.logo span{color:var(--accent)}
+nav ul{display:flex;gap:20px;list-style:none}
+nav ul li a{color:var(--text);text-decoration:none;font-weight:700;font-size:.88rem;transition:color .2s}
+nav ul li a:hover{color:var(--gold)}
+.nav-pts{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;font-weight:900;border-radius:50px;padding:7px 16px;font-size:.85rem;cursor:pointer;border:none;font-family:'Nunito',sans-serif;transition:transform .2s}
+.nav-pts:hover{transform:scale(1.05)}
+@media(max-width:640px){nav ul{display:none}}
+
+/* ── SCROLLING AD TICKER ── */
+.ad-ticker{width:100%;background:linear-gradient(90deg,#0b1528,#12203e,#0b1528);border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);padding:9px 0;overflow:hidden;position:relative;z-index:2}
+.ad-ticker-track{display:flex;white-space:nowrap;animation:tickerScroll 35s linear infinite}
+.ad-ticker-track:hover{animation-play-state:paused}
+.tick-item{display:inline-flex;align-items:center;gap:8px;padding:0 32px;font-size:.8rem;font-weight:700;color:var(--gold)}
+.tick-dot{width:7px;height:7px;background:var(--gold);border-radius:50%;animation:blink 1.2s infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── STICKY SIDEBAR ADS ── */
+.sidebar-ads{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:200;display:flex;flex-direction:column;gap:7px;padding:7px}
+.s-ad{background:linear-gradient(145deg,#0f1535,#192040);border:1.5px solid var(--gold);border-radius:13px;width:86px;padding:9px 6px;text-align:center;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.s-ad:hover{transform:scale(1.08) translateX(-5px);box-shadow:0 6px 24px rgba(255,215,0,.25)}
+.s-ad-icon{font-size:1.55rem;display:block;margin-bottom:3px}
+.s-ad-name{color:var(--gold);font-weight:800;font-size:.6rem;line-height:1.3;margin-bottom:2px}
+.s-ad-pts{color:var(--green);font-weight:900;font-size:.65rem}
+@media(max-width:700px){.sidebar-ads{display:none}}
+
+/* ── INLINE AD BLOCKS ── */
+.ad-block{position:relative;z-index:1;padding:16px 20px;background:linear-gradient(90deg,#0a1220,#101c36,#0a1220);border-top:1px solid rgba(255,215,0,.15);border-bottom:1px solid rgba(255,215,0,.15)}
+.ab-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.ab-card{background:#0f1535;border:1.5px solid rgba(255,215,0,.12);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:border-color .2s,transform .2s}
+.ab-card:hover{border-color:var(--gold);transform:scale(1.02)}
+.ab-icon{font-size:2rem;flex-shrink:0}
+.ab-title{font-weight:800;font-size:.85rem;color:#fff}
+.ab-desc{font-size:.72rem;color:var(--muted);margin-top:2px}
+.ab-pts{font-size:.72rem;color:var(--green);font-weight:800;margin-top:4px}
+.ad-pill{background:var(--gold);color:#000;font-size:.52rem;font-weight:900;border-radius:4px;padding:1px 5px;letter-spacing:1px;margin-right:4px;vertical-align:middle}
+
+/* ── SECTION BASE ── */
+section{position:relative;z-index:1}
+.sec-title{font-family:'Boogaloo',cursive;font-size:clamp(1.9rem,5vw,3rem);text-align:center;margin-bottom:8px;color:#fff}
+.sec-title span{color:var(--gold)}
+.sec-sub{text-align:center;color:var(--muted);font-size:.95rem;max-width:520px;margin:0 auto 40px;line-height:1.6}
+
+/* ── HERO ── */
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:130px 24px 70px;overflow:hidden}
+.glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+.g1{width:500px;height:500px;background:rgba(255,215,0,.12);top:8%;left:-12%}
+.g2{width:400px;height:400px;background:rgba(0,229,255,.09);bottom:5%;right:-8%}
+.g3{width:280px;height:280px;background:rgba(255,79,203,.07);top:42%;left:42%}
+.hero-badge{display:inline-block;background:linear-gradient(135deg,#FFD70020,#00E5FF15);border:1.5px solid var(--gold);border-radius:50px;padding:6px 22px;font-size:.8rem;font-weight:700;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:22px;animation:fadeDown .7s ease both}
+.hero h1{font-family:'Boogaloo',cursive;font-size:clamp(2.8rem,9vw,6.5rem);line-height:1;color:#fff;animation:fadeDown .8s .1s ease both;text-shadow:0 0 40px #ffd70033}
+.hero h1 .g{color:var(--gold)}.hero h1 .b{color:var(--accent)}
+.hero-sub{font-size:clamp(.95rem,2.5vw,1.2rem);color:var(--muted);max-width:580px;margin:16px auto 10px;font-weight:600;animation:fadeDown .9s .2s ease both;line-height:1.7}
+.hero-ghs{font-family:'Orbitron',sans-serif;font-size:clamp(1.1rem,3.5vw,1.85rem);color:var(--green);font-weight:900;margin-bottom:28px;text-shadow:0 0 18px #00ff9944;animation:fadeDown 1s .3s ease both}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;animation:fadeDown 1.1s .4s ease both}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;font-weight:900;font-size:.98rem;border:none;border-radius:50px;padding:13px 32px;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 28px rgba(255,215,0,.32);font-family:'Nunito',sans-serif}
+.btn-gold:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 8px 38px rgba(255,215,0,.52)}
+.btn-outline{background:transparent;color:var(--accent);font-weight:800;font-size:.98rem;border:2px solid var(--accent);border-radius:50px;padding:12px 32px;cursor:pointer;transition:background .2s,transform .2s;font-family:'Nunito',sans-serif}
+.btn-outline:hover{background:rgba(0,229,255,.1);transform:translateY(-3px)}
+.coins-wrap{position:absolute;inset:0;pointer-events:none}
+.coin{position:absolute;font-size:1.9rem;animation:floatC var(--cd,6s) var(--cd2,0s) ease-in-out infinite alternate;opacity:.45}
+@keyframes floatC{from{transform:translateY(0) rotate(0deg)}to{transform:translateY(-26px) rotate(14deg)}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── HOW IT WORKS ── */
+.how{padding:80px 24px;background:linear-gradient(180deg,#060918,#0A0E2A)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:20px;max-width:1100px;margin:0 auto}
+.step{background:var(--card);border:1.5px solid var(--border);border-radius:22px;padding:28px 22px;text-align:center;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.step::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--accent));opacity:0;transition:opacity .25s}
+.step:hover{transform:translateY(-7px);box-shadow:0 16px 44px rgba(255,215,0,.11)}
+.step:hover::before{opacity:1}
+.step-n{font-family:'Orbitron',sans-serif;font-size:2.6rem;font-weight:900;color:var(--gold);opacity:.12;position:absolute;top:10px;right:14px}
+.step-ico{font-size:2.5rem;margin-bottom:12px}
+.step h3{font-size:1rem;font-weight:900;margin-bottom:7px;color:#fff}
+.step p{font-size:.84rem;color:var(--muted);line-height:1.6}
+.hard-tag{display:inline-block;background:rgba(255,68,68,.12);border:1px solid var(--red);border-radius:50px;padding:3px 11px;font-size:.7rem;color:var(--red);font-weight:800;margin-top:9px}
+.good-tag{display:inline-block;background:rgba(0,255,153,.1);border:1px solid var(--green);border-radius:50px;padding:3px 11px;font-size:.7rem;color:var(--green);font-weight:800;margin-top:9px}
+
+/* ── EARN / AD PLAYER ── */
+.earn{padding:80px 24px;background:var(--dark)}
+.earn-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+@media(max-width:780px){.earn-inner{grid-template-columns:1fr}}
+.earn-text h2{font-family:'Boogaloo',cursive;font-size:clamp(1.7rem,4vw,2.7rem);color:#fff;margin-bottom:14px;line-height:1.15}
+.earn-text h2 span{color:var(--green)}
+.earn-text>p{color:var(--muted);font-size:.93rem;line-height:1.8;margin-bottom:18px}
+.rules-box{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:20px;margin-bottom:18px}
+.rules-box h4{color:var(--gold);font-weight:900;font-size:.92rem;margin-bottom:12px}
+.rule{display:flex;gap:10px;align-items:flex-start;margin-bottom:9px;font-size:.83rem;color:var(--muted);line-height:1.5}
+.rule .ri{flex-shrink:0;font-size:.95rem}
+.tiers{display:flex;flex-direction:column;gap:10px}
+.tier{display:flex;align-items:center;gap:14px;background:var(--card);border:1.5px solid var(--border);border-radius:13px;padding:13px 17px;transition:border-color .2s}
+.tier:hover{border-color:var(--gold)}
+.tier.hl{border-color:var(--green);background:rgba(0,255,153,.04)}
+.tier-pts{font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:900;color:var(--gold);min-width:88px}
+.tier.hl .tier-pts{color:var(--green)}
+.tier-info h4{font-size:.88rem;font-weight:800;color:#fff}
+.tier-info p{font-size:.76rem;color:var(--muted)}
+
+/* AD PLAYER WIDGET */
+.player-sticky{position:sticky;top:82px}
+.player-box{background:var(--card);border:1.5px solid var(--border);border-radius:26px;padding:26px 22px;text-align:center}
+.player-box h3{font-family:'Boogaloo',cursive;font-size:1.45rem;margin-bottom:4px;color:#fff}
+.player-sub{font-size:.78rem;color:var(--muted);margin-bottom:16px}
+.ad-screen{background:linear-gradient(135deg,#101828,#1a2448);border-radius:14px;height:190px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;position:relative;overflow:hidden;border:1.5px solid rgba(255,255,255,.06)}
+.screen-bg{position:absolute;inset:0;animation:bgShift 5s ease-in-out infinite alternate}
+@keyframes bgShift{from{background:linear-gradient(135deg,#0d1a30,#1a2a50)}to{background:linear-gradient(135deg,#1a0d30,#2a1a50)}}
+.play-btn{width:68px;height:68px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.7rem;cursor:pointer;position:relative;z-index:2;box-shadow:0 0 28px rgba(255,215,0,.38);animation:pulsePl 2s infinite;transition:transform .2s;user-select:none}
+.play-btn:hover{transform:scale(1.09)}
+.play-btn.off{background:linear-gradient(135deg,#2a2a3a,#3a3a4a);box-shadow:none;animation:none;cursor:not-allowed}
+@keyframes pulsePl{0%,100%{box-shadow:0 0 18px rgba(255,215,0,.3)}50%{box-shadow:0 0 48px rgba(255,215,0,.68)}}
+.ad-label-corner{position:absolute;top:9px;left:11px;background:var(--gold);color:#000;font-size:.58rem;font-weight:900;border-radius:5px;padding:2px 7px;z-index:3;letter-spacing:1px}
+.ad-time-corner{position:absolute;bottom:9px;right:11px;background:rgba(0,0,0,.7);color:#fff;font-size:.7rem;font-weight:700;border-radius:7px;padding:3px 9px;z-index:3}
+.prog-row{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);margin-bottom:4px}
+.prog-wrap{background:#1a2244;border-radius:50px;height:9px;overflow:hidden;margin-bottom:12px}
+.prog-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--accent));border-radius:50px;transition:width .18s linear}
+.cooldown-box{background:rgba(255,68,68,.07);border:1.5px solid rgba(255,68,68,.3);border-radius:12px;padding:11px 14px;margin-bottom:11px;display:none}
+.cooldown-box.on{display:block}
+.cd-title{font-size:.77rem;font-weight:800;color:var(--red);margin-bottom:3px}
+.cd-time{font-family:'Orbitron',sans-serif;font-size:1.55rem;font-weight:900;color:var(--red)}
+.pts-flash{display:inline-block;background:linear-gradient(135deg,var(--green),var(--accent));color:#000;font-weight:900;border-radius:50px;padding:6px 18px;font-size:.82rem;margin-bottom:10px;display:none}
+.mini-stats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:9px}
+.mini-stat{background:#111830;border-radius:11px;padding:9px;text-align:center}
+.ms-val{font-family:'Orbitron',sans-serif;font-size:1.15rem;font-weight:900;color:var(--gold)}
+.ms-lbl{font-size:.65rem;color:var(--muted);margin-top:2px}
+.daily-wrap{margin-top:11px}
+.dw-row{display:flex;justify-content:space-between;font-size:.73rem;color:var(--muted);margin-bottom:4px}
+.dw-bar{background:#1a2244;border-radius:50px;height:6px;overflow:hidden}
+.dw-fill{height:100%;border-radius:50px;background:linear-gradient(90deg,var(--pink),var(--red))}
+
+/* QUIZ */
+.quiz-overlay{display:none;position:fixed;inset:0;background:rgba(4,6,18,.92);z-index:400;align-items:center;justify-content:center;backdrop-filter:blur(10px)}
+.quiz-overlay.on{display:flex}
+.quiz-box{background:var(--card);border:2px solid var(--gold);border-radius:26px;padding:40px 34px;max-width:430px;width:90%;text-align:center;animation:popIn .4s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes popIn{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+.quiz-box h2{font-family:'Boogaloo',cursive;font-size:1.9rem;color:var(--gold);margin-bottom:6px}
+.quiz-sub{font-size:.85rem;color:var(--muted);margin-bottom:20px}
+.q-text{background:#111830;border-radius:14px;padding:16px;font-size:.97rem;font-weight:700;color:#fff;margin-bottom:18px;line-height:1.5}
+.q-opts{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.q-opt{background:#0f1535;border:1.5px solid rgba(255,255,255,.1);border-radius:11px;padding:11px;font-size:.87rem;font-weight:700;color:var(--text);cursor:pointer;transition:background .2s,border-color .2s;font-family:'Nunito',sans-serif}
+.q-opt:hover{background:rgba(255,215,0,.08);border-color:var(--gold)}
+.q-opt.right{background:rgba(0,255,153,.14);border-color:var(--green);color:var(--green)}
+.q-opt.wrong{background:rgba(255,68,68,.14);border-color:var(--red);color:var(--red)}
+.q-result{margin-top:14px;font-size:.88rem;font-weight:700;min-height:22px}
+.q-continue{width:100%;margin-top:14px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;border-radius:50px;padding:12px;font-weight:900;font-size:.92rem;cursor:pointer;font-family:'Nunito',sans-serif;display:none}
+
+/* LEARN SECTION */
+.learn{padding:80px 24px;background:linear-gradient(180deg,#0A0E2A,#060918)}
+.learn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:20px;max-width:1100px;margin:0 auto}
+.lcard{border-radius:26px;padding:30px 24px;position:relative;overflow:hidden;cursor:pointer;transition:transform .28s;min-height:270px}
+.lcard:hover{transform:scale(1.03) translateY(-5px)}
+.lcard.cs{background:linear-gradient(145deg,#0f1a3a,#0a2a4a);border:2px solid rgba(0,229,255,.22)}
+.lcard.math{background:linear-gradient(145deg,#1a0f3a,#2a0a4a);border:2px solid rgba(255,79,203,.22)}
+.lcard.game{background:linear-gradient(145deg,#0f3a1a,#0a4a2a);border:2px solid rgba(0,255,153,.22)}
+.lcard .lico{font-size:3rem;margin-bottom:12px;display:block}
+.lcard h3{font-family:'Boogaloo',cursive;font-size:1.65rem;color:#fff;margin-bottom:8px}
+.lcard p{font-size:.85rem;color:var(--muted);line-height:1.7;margin-bottom:14px}
+.ltag{display:inline-flex;align-items:center;border-radius:50px;padding:4px 13px;font-size:.73rem;font-weight:800}
+.ltag.bl{background:rgba(0,229,255,.11);color:var(--accent);border:1px solid var(--accent)}
+.ltag.pk{background:rgba(255,79,203,.11);color:var(--pink);border:1px solid var(--pink)}
+.ltag.gr{background:rgba(0,255,153,.11);color:var(--green);border:1px solid var(--green)}
+.lcard-deco{position:absolute;font-size:6.5rem;opacity:.05;right:-8px;bottom:-8px;pointer-events:none}
+.l-topics{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:13px}
+.l-topic{background:rgba(255,255,255,.05);border-radius:50px;padding:3px 10px;font-size:.7rem;color:#ccd;font-weight:600}
+.l-ad-note{background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.18);border-radius:10px;padding:7px 11px;font-size:.7rem;color:var(--gold);font-weight:800;margin-top:10px;text-align:center}
+
+/* DASHBOARD */
+.dash-sec{padding:80px 24px;background:var(--dark)}
+.dash-box{max-width:880px;margin:0 auto;background:var(--card);border:1.5px solid var(--border);border-radius:26px;overflow:hidden;box-shadow:0 28px 72px rgba(0,0,0,.48)}
+.db-hdr{background:linear-gradient(90deg,#0f1535,#111e40);padding:17px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid var(--border)}
+.db-hdr-l{display:flex;align-items:center;gap:12px}
+.db-ava{width:40px;height:40px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.25rem}
+.db-name{font-weight:800;font-size:.92rem}
+.db-lvl{font-size:.7rem;color:var(--gold);font-weight:700}
+.db-pts-hdr{font-family:'Orbitron',sans-serif;font-size:1.35rem;font-weight:900;color:var(--gold);text-shadow:0 0 14px #ffd70055}
+.db-pts-hdr span{font-size:.62rem;color:var(--muted);font-family:'Nunito',sans-serif;font-weight:600;vertical-align:middle}
+.db-body{padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.db-body{grid-template-columns:1fr}}
+.db-card{background:#111830;border:1.5px solid rgba(255,255,255,.06);border-radius:16px;padding:18px 16px;transition:border-color .2s}
+.db-card:hover{border-color:var(--gold)}
+.db-ct{font-size:.7rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:9px}
+.db-big{font-family:'Orbitron',sans-serif;font-size:1.75rem;font-weight:900;color:#fff}
+.db-small{font-size:.76rem;color:var(--muted);margin-top:3px}
+.db-bar-w{background:#1a2244;border-radius:50px;height:6px;margin-top:9px;overflow:hidden}
+.db-bar{height:100%;border-radius:50px}
+.db-bar.p{background:linear-gradient(90deg,var(--gold),var(--accent))}
+.db-bar.a{background:linear-gradient(90deg,var(--pink),var(--accent))}
+.badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}
+.bdg{background:rgba(255,215,0,.11);border:1px solid rgba(255,215,0,.28);border-radius:50px;padding:3px 9px;font-size:.68rem;color:var(--gold);font-weight:700}
+.wd-btn{background:linear-gradient(135deg,var(--green),var(--accent));color:#000;border:none;border-radius:50px;padding:9px 18px;font-weight:900;font-size:.83rem;cursor:pointer;margin-top:11px;width:100%;font-family:'Nunito',sans-serif}
+
+/* REGISTER */
+.reg-sec{padding:80px 24px;background:linear-gradient(180deg,#060918,#0A0E2A)}
+.reg-box{max-width:510px;margin:0 auto;background:var(--card);border:1.5px solid var(--border);border-radius:30px;padding:44px 38px;box-shadow:0 28px 72px rgba(0,0,0,.4);position:relative;overflow:hidden}
+.reg-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--accent),var(--pink))}
+.reg-box h2{font-family:'Boogaloo',cursive;font-size:2rem;color:#fff;margin-bottom:5px;text-align:center}
+.reg-box>p{text-align:center;color:var(--muted);font-size:.88rem;margin-bottom:28px}
+.fg{margin-bottom:16px}
+.fg label{display:block;font-size:.76rem;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.8px}
+.fg input,.fg select{width:100%;background:#111830;border:1.5px solid rgba(255,255,255,.08);border-radius:12px;padding:11px 15px;color:#fff;font-size:.93rem;font-family:'Nunito',sans-serif;outline:none;transition:border-color .2s}
+.fg input:focus,.fg select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,215,0,.07)}
+.fg input::placeholder{color:#3a4166}
+.btn-register{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;font-weight:900;font-size:.98rem;border:none;border-radius:50px;padding:14px;cursor:pointer;margin-top:7px;transition:transform .2s,box-shadow .2s;font-family:'Nunito',sans-serif}
+.btn-register:hover{transform:translateY(-2px);box-shadow:0 9px 32px rgba(255,215,0,.33)}
+.reg-note{text-align:center;color:var(--muted);font-size:.73rem;margin-top:12px;line-height:1.6}
+.reg-note a{color:var(--gold);text-decoration:none}
+
+/* FLOATING AD POPUP */
+.float-ad{position:fixed;bottom:22px;left:22px;z-index:250;background:var(--card);border:2px solid var(--gold);border-radius:18px;padding:16px 18px;max-width:248px;box-shadow:0 10px 38px rgba(0,0,0,.5);display:none;animation:slideL .5s ease both}
+.float-ad.on{display:block}
+@keyframes slideL{from{transform:translateX(-90px);opacity:0}to{transform:translateX(0);opacity:1}}
+.fa-close{position:absolute;top:7px;right:11px;background:none;border:none;color:var(--muted);font-size:1rem;cursor:pointer}
+.fa-ico{font-size:1.9rem;margin-bottom:7px}
+.fa-title{font-weight:900;font-size:.87rem;color:#fff;margin-bottom:3px}
+.fa-desc{font-size:.72rem;color:var(--muted);margin-bottom:9px;line-height:1.5}
+.fa-btn{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;border-radius:50px;padding:7px 16px;font-weight:900;font-size:.76rem;cursor:pointer;width:100%;font-family:'Nunito',sans-serif}
+.fa-pts{font-size:.68rem;color:var(--green);font-weight:800;text-align:center;margin-top:5px}
+
+/* FOOTER */
+footer{background:#050714;border-top:1.5px solid var(--border);padding:44px 30px 26px;text-align:center;position:relative;z-index:1}
+.f-logo{font-family:'Orbitron',sans-serif;font-size:1.35rem;font-weight:900;color:var(--gold);letter-spacing:2px;display:block;margin-bottom:10px}
+.f-logo span{color:var(--accent)}
+footer>p{color:var(--muted);font-size:.82rem;line-height:1.8;max-width:400px;margin:0 auto 16px}
+.f-ad-strip{background:linear-gradient(90deg,#0f1535,#111e3a);border-radius:14px;padding:13px 20px;max-width:680px;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;border:1px solid rgba(255,215,0,.11)}
+.f-ad-item{font-size:.76rem;color:var(--gold);font-weight:700;display:flex;align-items:center;gap:5px}
+.f-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+.f-links a{color:var(--muted);text-decoration:none;font-size:.8rem;transition:color .2s}
+.f-links a:hover{color:var(--gold)}
+.f-copy{color:#2e3358;font-size:.73rem}
+
+/* MODALS */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(4,6,18,.88);z-index:350;backdrop-filter:blur(8px);align-items:center;justify-content:center}
+.modal-bg.on{display:flex}
+.modal{background:var(--card);border:1.5px solid var(--border);border-radius:26px;padding:38px 34px;max-width:410px;width:90%;text-align:center;position:relative;animation:popIn .4s cubic-bezier(.34,1.56,.64,1) both}
+.m-close{position:absolute;top:13px;right:15px;background:none;border:none;color:var(--muted);font-size:1.25rem;cursor:pointer}
+.modal h2{font-family:'Boogaloo',cursive;font-size:1.9rem;color:#fff;margin-bottom:9px}
+.modal p{color:var(--muted);font-size:.88rem;line-height:1.7;margin-bottom:16px}
+.m-pts{font-family:'Orbitron',sans-serif;font-size:3rem;font-weight:900;color:var(--gold);text-shadow:0 0 28px #ffd70044;margin:9px 0}
+.m-ghs{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:900;color:var(--green);margin:6px 0}
+.m-info{background:#111830;border-radius:12px;padding:13px;margin:11px 0;font-size:.8rem;color:var(--muted);line-height:1.6;text-align:left}
+.modal .btn-gold{width:100%;margin-top:6px}
+
+/* TOAST */
+#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;font-weight:900;border-radius:50px;padding:10px 26px;font-size:.88rem;z-index:999;transition:transform .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
+#toast.on{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+
+<!-- ═══ STICKY SIDEBAR ADS ═══ -->
+<div class="sidebar-ads">
+  <div class="s-ad" onclick="quickAd('MTN MoMo',4)"><span class="s-ad-icon">📱</span><div class="s-ad-name">MTN MoMo</div><div class="s-ad-pts">+4 pts</div></div>
+  <div class="s-ad" onclick="quickAd('Fidelity Bank',5)"><span class="s-ad-icon">🏦</span><div class="s-ad-name">Fidelity Bank</div><div class="s-ad-pts">+5 pts</div></div>
+  <div class="s-ad" onclick="quickAd('Jumia GH',3)"><span class="s-ad-icon">🛒</span><div class="s-ad-name">Jumia Ghana</div><div class="s-ad-pts">+3 pts</div></div>
+  <div class="s-ad" onclick="quickAd('Bolt Food',4)"><span class="s-ad-icon">🍔</span><div class="s-ad-name">Bolt Food</div><div class="s-ad-pts">+4 pts</div></div>
+  <div class="s-ad" onclick="quickAd('Vodafone GH',3)"><span class="s-ad-icon">📡</span><div class="s-ad-name">Vodafone</div><div class="s-ad-pts">+3 pts</div></div>
+</div>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="logo">LUFFY <span>FFX</span></div>
+  <ul>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#earn">Watch Ads</a></li>
+    <li><a href="#learn">Learn</a></li>
+    <li><a href="#register">Join Free</a></li>
+  </ul>
+  <button class="nav-pts" onclick="openModal('ptsModal')">⭐ <span id="navPts">0</span> pts</button>
+</nav>
+
+<!-- ═══ TOP AD TICKER ═══ -->
+<div class="ad-ticker" style="margin-top:58px">
+  <div class="ad-ticker-track" id="ticker">
+    <span class="tick-item"><span class="tick-dot"></span>📱 MTN Ghana — 5GB for GH₵5! Watch ad → +4 pts</span>
+    <span class="tick-item"><span class="tick-dot"></span>🏦 Fidelity Bank — Free student account! Watch ad → +5 pts</span>
+    <span class="tick-item"><span class="tick-dot"></span>🛒 Jumia Ghana — 50% OFF Electronics! Watch ad → +3 pts</span>
+    <span class="tick-item"><span class="tick-dot"></span>🍔 Bolt Food GH — Free delivery on first order! Watch ad → +4 pts</span>
+    <span class="tick-item"><span class="tick-dot"></span>🎓 GhanaLearn Pro — 500+ courses online! Watch ad → +6 pts</span>
+    <span class="tick-item"><span class="tick-dot"></span>💡 LUFFY FFX — 1,500 pts = GH₵10 cash to your MoMo!</span>
+    <span class="tick-item"><span class="tick-dot"></span>📱 MTN Ghana — 5GB for GH₵5! Watch ad → +4 pts</span>
+    <span class="tick-item"><span class="tick-dot"></span>🏦 Fidelity Bank — Free student account! Watch ad → +5 pts</span>
+    <span class="tick-item"><span class="tick-dot"></span>🛒 Jumia Ghana — 50% OFF Electronics! Watch ad → +3 pts</span>
+    <span class="tick-item"><span class="tick-dot"></span>🍔 Bolt Food GH — Free delivery on first order! Watch ad → +4 pts</span>
+    <span class="tick-item"><span class="tick-dot"></span>🎓 GhanaLearn Pro — 500+ courses online! Watch ad → +6 pts</span>
+    <span class="tick-item"><span class="tick-dot"></span>💡 LUFFY FFX — 1,500 pts = GH₵10 cash to your MoMo!</span>
+  </div>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
+  <div class="coins-wrap" id="coins"></div>
+  <div class="hero-badge">🇬🇭 Ghana's #1 Learn & Earn Platform</div>
+  <h1><span class="g">LUFFY</span> <span class="b">FFX</span><br>Learn. Watch Ads.<br>Get Paid. 💵</h1>
+  <p class="hero-sub">Watch video ads between your lessons, stack up points patiently, and withdraw real Ghana Cedis straight to your MTN MoMo or bank!</p>
+  <div class="hero-ghs">🏆 1,500 Points = <span style="color:var(--gold)">GH₵10.00</span> Real Cash!</div>
+  <div class="hero-btns">
+    <button class="btn-gold" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">🎮 Join Free & Start Earning</button>
+    <button class="btn-outline" onclick="document.getElementById('earn').scrollIntoView({behavior:'smooth'})">📺 Watch Ads Now</button>
+  </div>
+</section>
+
+<!-- ═══ AD BLOCK 1 ═══ -->
+<div class="ad-block">
+  <div class="ab-inner">
+    <div class="ab-card" onclick="quickAd('MTN Data Bundle',4)">
+      <div class="ab-icon">📱</div>
+      <div><div class="ab-title"><span class="ad-pill">AD</span>MTN Data Bundle Deal</div><div class="ab-desc">5GB for just GH₵5 — best value in Ghana!</div><div class="ab-pts">👆 Tap to view & earn +4 pts</div></div>
+    </div>
+    <div class="ab-card" onclick="quickAd('Fidelity Student Account',5)">
+      <div class="ab-icon">🏦</div>
+      <div><div class="ab-title"><span class="ad-pill">AD</span>Fidelity Student Account</div><div class="ab-desc">Open a free zero-fee student bank account today!</div><div class="ab-pts">👆 Tap to view & earn +5 pts</div></div>
+    </div>
+    <div class="ab-card" onclick="quickAd('Jumia Flash Sale',4)">
+      <div class="ab-icon">🛒</div>
+      <div><div class="ab-title"><span class="ad-pill">AD</span>Jumia Flash Sale — 50% OFF</div><div class="ab-desc">Huge discounts on phones, laptops & accessories!</div><div class="ab-pts">👆 Tap to view & earn +4 pts</div></div>
+    </div>
+    <div class="ab-card" onclick="quickAd('GhanaLearn Pro',6)">
+      <div class="ab-icon">🎓</div>
+      <div><div class="ab-title"><span class="ad-pill">AD</span>GhanaLearn Pro Courses</div><div class="ab-desc">500+ online courses in coding, math & business!</div><div class="ab-pts">👆 Tap to view & earn +6 pts</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section class="how" id="how">
+  <p class="sec-title">How It <span>Works</span> 🛠️</p>
+  <p class="sec-sub">Points are earned slowly on purpose — so every GH₵10 withdrawal is a real achievement you worked hard for! 💪</p>
+  <div class="steps">
+    <div class="step"><div class="step-n">1</div><div class="step-ico">📝</div><h3>Sign Up Free</h3><p>Register with your phone number, email & MoMo wallet. Account is 100% free forever.</p></div>
+    <div class="step"><div class="step-n">2</div><div class="step-ico">📺</div><h3>Watch Full 30s Ads</h3><p>Every ad is 30 seconds. You MUST watch the full ad. Pausing or leaving the tab = 0 points!</p><div class="hard-tag">⚠️ Full watch required</div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-ico">⏳</div><h3>3-Min Cooldown</h3><p>After EVERY ad there is a mandatory 3-minute wait before the next one. No skipping — ever!</p><div class="hard-tag">⏱️ 180s between ads</div></div>
+    <div class="step"><div class="step-n">4</div><div class="step-ico">🧠</div><h3>Quiz Every 5 Ads</h3><p>After every 5 ads you must correctly answer a quick knowledge quiz. Pass = +10 bonus pts. Fail = 0 bonus!</p><div class="hard-tag">❓ Quiz checkpoint</div></div>
+    <div class="step"><div class="step-n">5</div><div class="step-ico">📊</div><h3>Max 20 Ads/Day</h3><p>You can only watch 20 ads per day. Earning ~3–6 pts per ad means about 90 pts max per day.</p><div class="hard-tag">📅 Daily cap enforced</div></div>
+    <div class="step"><div class="step-n">6</div><div class="step-ico">💵</div><h3>1,500 pts → GH₵10!</h3><p>Reach 1,500 points after ~17 days of daily effort and withdraw GH₵10 to your MoMo!</p><div class="good-tag">🎯 GH₵10 real cash!</div></div>
+  </div>
+</section>
+
+<!-- ═══ AD BLOCK 2 ═══ -->
+<div class="ad-block">
+  <div class="ab-inner">
+    <div class="ab-card" onclick="quickAd('Bolt Food Delivery',4)">
+      <div class="ab-icon">🍔</div>
+      <div><div class="ab-title"><span class="ad-pill">AD</span>Bolt Food — Free First Delivery</div><div class="ab-desc">Order food from your favourite restaurants in Accra!</div><div class="ab-pts">👆 Tap to view & earn +4 pts</div></div>
+    </div>
+    <div class="ab-card" onclick="quickAd('AirtelTigo Network',3)">
+      <div class="ab-icon">📡</div>
+      <div><div class="ab-title"><span class="ad-pill">AD</span>AirtelTigo — Fastest 4G in Ghana</div><div class="ab-desc">Switch today and get 2GB free data on us!</div><div class="ab-pts">👆 Tap to view & earn +3 pts</div></div>
+    </div>
+    <div class="ab-card" onclick="quickAd('GCB Student Loan',5)">
+      <div class="ab-icon">🏫</div>
+      <div><div class="ab-title"><span class="ad-pill">AD</span>GCB Bank — Student Loans</div><div class="ab-desc">Low-interest university fee loans for Ghanaian students!</div><div class="ab-pts">👆 Tap to view & earn +5 pts</div></div>
+    </div>
+    <div class="ab-card" onclick="quickAd('Hubtel Pay',3)">
+      <div class="ab-icon">💳</div>
+      <div><div class="ab-title"><span class="ad-pill">AD</span>Hubtel Pay — Easy Payments</div><div class="ab-desc">Pay bills, buy airtime, send money — all in one app!</div><div class="ab-pts">👆 Tap to view & earn +3 pts</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EARN / AD PLAYER ═══ -->
+<section class="earn" id="earn">
+  <div class="earn-inner">
+    <!-- LEFT: INFO -->
+    <div class="earn-text">
+      <h2>Watch Ads.<br><span>Earn Points.</span><br>Cash Out GH₵. 🇬🇭</h2>
+      <p>Our point system is intentionally slow and challenging. This keeps the platform fair, prevents abuse, and ensures every withdrawal is genuinely earned through consistent effort.</p>
+
+      <div class="rules-box">
+        <h4>⚙️ Point Earning Rules — Read Carefully!</h4>
+        <div class="rule"><span class="ri">📺</span><span>Each ad is <strong>30 seconds</strong>. Watch the entire video — no skipping, no tab-switching.</span></div>
+        <div class="rule"><span class="ri">🎲</span><span>Points per ad are <strong>random (3–6 pts)</strong>. Average ~4.5 pts. No guaranteed amount.</span></div>
+        <div class="rule"><span class="ri">⏳</span><span>A <strong>3-minute cooldown</strong> is forced between every ad. No exceptions at all.</span></div>
+        <div class="rule"><span class="ri">📊</span><span><strong>Maximum 20 ads per day</strong>. After 20 ads, the player locks until the next day.</span></div>
+        <div class="rule"><span class="ri">🧠</span><span>Every <strong>5 ads</strong>, you must pass a knowledge quiz to unlock the next batch.</span></div>
+        <div class="rule"><span class="ri">📅</span><span>At maximum daily effort: <strong>~90 pts/day</strong> → ~17 days to reach 1,500 pts.</span></div>
+      </div>
+
+      <div class="tiers">
+        <div class="tier"><div class="tier-pts">300 pts</div><div class="tier-info"><h4>🥉 Bronze Badge</h4><p>Unlock bonus content & extra ad slots</p></div></div>
+        <div class="tier"><div class="tier-pts">750 pts</div><div class="tier-info"><h4>🥈 Silver Earner</h4><p>Unlock premium course chapters free</p></div></div>
+        <div class="tier hl"><div class="tier-pts">1,500 pts</div><div class="tier-info"><h4>🥇 WITHDRAW → GH₵10.00 🎉</h4><p>Cash out to MTN MoMo, Vodafone Cash or bank!</p></div></div>
+        <div class="tier"><div class="tier-pts">3,000 pts</div><div class="tier-info"><h4>💎 WITHDRAW → GH₵22.00</h4><p>Diamond earner — VIP access + bigger payout</p></div></div>
+        <div class="tier"><div class="tier-pts">5,000 pts</div><div class="tier-info"><h4>👑 WITHDRAW → GH₵40.00</h4><p>LUFFY FFX Legend Hall of Fame!</p></div></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: AD PLAYER -->
+    <div class="player-sticky">
+      <div class="player-box">
+        <h3>📺 Ad Player</h3>
+        <div class="player-sub">Watch the full 30s ad to earn points</div>
+
+        <div class="cooldown-box" id="cdBox">
+          <div class="cd-title">⏳ Cooldown — next ad in:</div>
+          <div class="cd-time" id="cdTimer">3:00</div>
+        </div>
+
+        <div class="ad-screen">
+          <div class="screen-bg"></div>
+          <div class="ad-label-corner">AD</div>
+          <div class="ad-time-corner" id="adTimeCorner">30s</div>
+          <div class="play-btn" id="playBtn" onclick="startAd()">▶</div>
+        </div>
+
+        <div class="prog-row">
+          <span id="progText">Ready — tap ▶ to watch</span>
+          <span id="progPts" style="color:var(--green);font-weight:800"></span>
+        </div>
+        <div class="prog-wrap"><div class="prog-bar" id="progBar"></div></div>
+
+        <div class="pts-flash" id="ptsFlash">+0 pts! ⭐</div>
+
+        <div class="mini-stats">
+          <div class="mini-stat"><div class="ms-val" id="msTotalPts">0</div><div class="ms-lbl">Total Points</div></div>
+          <div class="mini-stat"><div class="ms-val" id="msAdsToday">0</div><div class="ms-lbl">Ads Today</div></div>
+        </div>
+
+        <div class="daily-wrap">
+          <div class="dw-row"><span>Daily Limit</span><span id="dailyTxt">0 / 20 ads</span></div>
+          <div class="dw-bar"><div class="dw-fill" id="dailyFill" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ AD BLOCK 3 ═══ -->
+<div class="ad-block">
+  <div class="ab-inner">
+    <div class="ab-card" onclick="quickAd('Melcom Electronics',4)">
+      <div class="ab-icon">📺</div>
+      <div><div class="ab-title"><span class="ad-pill">AD</span>Melcom — Electronics Sale</div><div class="ab-desc">TVs, phones, fridges at the lowest prices in Ghana!</div><div class="ab-pts">👆 Tap to view & earn +4 pts</div></div>
+    </div>
+    <div class="ab-card" onclick="quickAd('Glovo Ghana',3)">
+      <div class="ab-icon">🛵</div>
+      <div><div class="ab-title"><span class="ad-pill">AD</span>Glovo — Delivered in 30 Mins</div><div class="ab-desc">Food, groceries & parcels to your door fast!</div><div class="ab-pts">👆 Tap to view & earn +3 pts</div></div>
+    </div>
+    <div class="ab-card" onclick="quickAd('Accra Tech Hub',5)">
+      <div class="ab-icon">🏢</div>
+      <div><div class="ab-title"><span class="ad-pill">AD</span>Accra Tech Hub — Join Us!</div><div class="ab-desc">Free co-working for student developers in Accra!</div><div class="ab-pts">👆 Tap to view & earn +5 pts</div></div>
+    </div>
+    <div class="ab-card" onclick="quickAd('Vodafone Home Broadband',4)">
+      <div class="ab-icon">📶</div>
+      <div><div class="ab-title"><span class="ad-pill">AD</span>Vodafone Home Broadband</div><div class="ab-desc">Unlimited home internet from GH₵99/month!</div><div class="ab-pts">👆 Tap to view & earn +4 pts</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LEARNING ═══ -->
+<section class="learn" id="learn">
+  <p class="sec-title">The <span>Learning Worlds</span> 🎓</p>
+  <p class="sec-sub">Three completely different zones of knowledge — each one unique, fun, and powered by your ad earnings!</p>
+  <div class="learn-grid">
+    <div class="lcard cs">
+      <span class="lico">💻</span>
+      <h3>Computer Science</h3>
+      <p>From complete beginner to junior coder! Learn Python, web development, algorithms, data structures, and how AI really works.</p>
+      <div class="l-topics"><span class="l-topic">Python</span><span class="l-topic">Algorithms</span><span class="l-topic">Web Dev</span><span class="l-topic">Data Structures</span><span class="l-topic">AI Intro</span></div>
+      <span class="ltag bl">⚡ Interactive Coding</span>
+      <div class="l-ad-note">📺 Watch a 30s ad to unlock Chapter 3 for FREE!</div>
+      <div class="lcard-deco">💻</div>
+    </div>
+    <div class="lcard math">
+      <span class="lico">📐</span>
+      <h3>Mathematics</h3>
+      <p>Make maths exciting and fun! From basic arithmetic and fractions all the way to algebra, geometry, and introductory calculus.</p>
+      <div class="l-topics"><span class="l-topic">Arithmetic</span><span class="l-topic">Algebra</span><span class="l-topic">Geometry</span><span class="l-topic">Statistics</span><span class="l-topic">Calculus Intro</span></div>
+      <span class="ltag pk">🧩 Puzzle-Based Learning</span>
+      <div class="l-ad-note">📺 Watch a 30s ad to earn +5 bonus pts on your next quiz!</div>
+      <div class="lcard-deco">📐</div>
+    </div>
+    <div class="lcard game">
+      <span class="lico">🎮</span>
+      <h3>Game Development</h3>
+      <p>Build your own real games! Learn game design principles, Unity basics, sprite creation, 2D physics, and full level design.</p>
+      <div class="l-topics"><span class="l-topic">Game Design</span><span class="l-topic">Unity Basics</span><span class="l-topic">Scratch</span><span class="l-topic">2D Physics</span><span class="l-topic">Level Design</span></div>
+      <span class="ltag gr">🕹️ Build Real Games</span>
+      <div class="l-ad-note">📺 Watch a 30s ad to download the Unity starter project!</div>
+      <div class="lcard-deco">🎮</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ AD BLOCK 4 ═══ -->
+<div class="ad-block">
+  <div class="ab-inner">
+    <div class="ab-card" onclick="quickAd('Kofi Boateng Academy',6)">
+      <div class="ab-icon">👨‍🏫</div>
+      <div><div class="ab-title"><span class="ad-pill">AD</span>Kofi Boateng Academy</div><div class="ab-desc">Ghana's #1 BECE & WASSCE prep tutoring platform!</div><div class="ab-pts">👆 Tap to view & earn +6 pts</div></div>
+    </div>
+    <div class="ab-card" onclick="quickAd('Enterprise Insurance',4)">
+      <div class="ab-icon">🛡️</div>
+      <div><div class="ab-title"><span class="ad-pill">AD</span>Enterprise Insurance GH</div><div class="ab-desc">Protect your family. Affordable student cover plans!</div><div class="ab-pts">👆 Tap to view & earn +4 pts</div></div>
+    </div>
+    <div class="ab-card" onclick="quickAd('Nandos Ghana',3)">
+      <div class="ab-icon">🍗</div>
+      <div><div class="ab-title"><span class="ad-pill">AD</span>Nando's Ghana — Flame Grilled</div><div class="ab-desc">Student meal deal — Peri-Peri chicken GH₵35!</div><div class="ab-pts">👆 Tap to view & earn +3 pts</div></div>
+    </div>
+    <div class="ab-card" onclick="quickAd('KPMG Ghana Internship',5)">
+      <div class="ab-icon">💼</div>
+      <div><div class="ab-title"><span class="ad-pill">AD</span>KPMG Ghana — Internships</div><div class="ab-desc">Apply for paid graduate internships at KPMG Ghana!</div><div class="ab-pts">👆 Tap to view & earn +5 pts</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DASHBOARD ═══ -->
+<section class="dash-sec">
+  <p class="sec-title">Your <span>Dashboard</span> 📊</p>
+  <p class="sec-sub">Live tracker for your points, ads, and GH₵ progress.</p>
+  <div class="dash-box">
+    <div class="db-hdr">
+      <div class="db-hdr-l">
+        <div class="db-ava">🦁</div>
+        <div><div class="db-name">Luffy Learner</div><div class="db-lvl">⭐ Starter — keep going!</div></div>
+      </div>
+      <div class="db-pts-hdr" id="dbHdrPts">0 <span>pts</span></div>
+    </div>
+    <div class="db-body">
+      <div class="db-card">
+        <div class="db-ct">Total Points</div>
+        <div class="db-big" id="dbBig">0</div>
+        <div class="db-small" id="dbSmall">1,500 pts to GH₵10 withdrawal 💰</div>
+        <div class="db-bar-w"><div class="db-bar p" id="dbPtsBar" style="width:0%"></div></div>
+      </div>
+      <div class="db-card">
+        <div class="db-ct">Ads Watched Today</div>
+        <div class="db-big" id="dbAdsToday">0</div>
+        <div class="db-small">Max 20 ads allowed per day</div>
+        <div class="db-bar-w"><div class="db-bar a" id="dbAdsBar" style="width:0%"></div></div>
+      </div>
+      <div class="db-card">
+        <div class="db-ct">Estimated GH₵ Value</div>
+        <div class="db-big" id="dbGhs" style="color:var(--green)">GH₵0.00</div>
+        <div class="db-small">Based on current points</div>
+        <div class="badges" id="dbBadges"><span class="bdg">STARTER</span></div>
+      </div>
+      <div class="db-card">
+        <div class="db-ct">Withdrawal Status</div>
+        <div class="db-big" id="dbWdSt" style="font-size:1rem;color:var(--muted)">Not ready yet</div>
+        <div class="db-small" id="dbWdNote">Keep watching ads every day!</div>
+        <button class="wd-btn" onclick="openModal('wdModal')">💳 Check Withdrawal</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ REGISTER ═══ -->
+<section class="reg-sec" id="register">
+  <p class="sec-title">Join <span>LUFFY FFX</span> 🚀</p>
+  <p class="sec-sub">Create your free account and start your journey to GH₵10!</p>
+  <div class="reg-box">
+    <h2>Create Free Account ✨</h2>
+    <p>Sign up with your phone & email — takes 60 seconds!</p>
+    <div class="fg"><label>Full Name</label><input type="text" id="rName" placeholder="Your full name"></div>
+    <div class="fg"><label>Ghana Phone Number</label><input type="tel" id="rPhone" placeholder="024 000 0000 or 050 000 0000"></div>
+    <div class="fg"><label>Email Address</label><input type="email" id="rEmail" placeholder="yourname@email.com"></div>
+    <div class="fg"><label>Mobile Money Wallet</label>
+      <select id="rMomo">
+        <option value="">Select your MoMo provider</option>
+        <option>MTN Mobile Money (MoMo)</option>
+        <option>Vodafone Cash</option>
+        <option>AirtelTigo Money</option>
+        <option>Bank Account (Ghana)</option>
+      </select>
+    </div>
+    <div class="fg"><label>I Am A...</label>
+      <select id="rRole">
+        <option value="">Select your role</option>
+        <option>Primary School Student</option>
+        <option>Secondary / SHS Student</option>
+        <option>University Student</option>
+        <option>Parent / Guardian</option>
+        <option>Teacher</option>
+        <option>Just a Learner!</option>
+      </select>
+    </div>
+    <div class="fg"><label>Password</label><input type="password" id="rPass" placeholder="Create a strong password"></div>
+    <button class="btn-register" onclick="doRegister()">🎯 Create Account & Start Earning GH₵</button>
+    <p class="reg-note">100% free. Withdrawals paid within 24–48hrs to your MoMo or bank.<br>Already have an account? <a href="#">Log in here</a></p>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="f-ad-strip">
+    <div class="f-ad-item">📱 MTN Ghana</div>
+    <div class="f-ad-item">🏦 Fidelity Bank</div>
+    <div class="f-ad-item">🛒 Jumia Ghana</div>
+    <div class="f-ad-item">📡 AirtelTigo</div>
+    <div class="f-ad-item">🍔 Bolt Food</div>
+    <div class="f-ad-item">🎓 GhanaLearn Pro</div>
+    <div class="f-ad-item">💳 Hubtel Pay</div>
+  </div>
+  <span class="f-logo">LUFFY <span>FFX</span></span>
+  <p>Ghana's #1 learn-and-earn platform where students & kids earn real GH₵ by watching ads and mastering Computer Science, Mathematics & Game Development.</p>
+  <div class="f-links">
+    <a href="#">About</a><a href="#">How It Works</a><a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a><a href="#">Advertise With Us</a><a href="#">Contact</a><a href="#">Parent Guide</a>
+  </div>
+  <p class="f-copy">© 2026 LUFFY FFX Ghana. All rights reserved. 🇬🇭 Built for Ghanaian students.</p>
+</footer>
+
+<!-- ═══ TOAST ═══ -->
+<div id="toast">+0 pts!</div>
+
+<!-- ═══ FLOATING AD ═══ -->
+<div class="float-ad" id="floatAd">
+  <button class="fa-close" onclick="closeFA()">✕</button>
+  <div class="fa-ico" id="faIco">🎓</div>
+  <div class="fa-title" id="faTitle">GhanaLearn Pro</div>
+  <div class="fa-desc" id="faDesc">500+ courses in coding, maths & science — all from Ghana!</div>
+  <button class="fa-btn" onclick="claimFA()">👆 View This Ad & Earn!</button>
+  <div class="fa-pts" id="faPts">+5 pts for viewing</div>
+</div>
+
+<!-- ═══ QUIZ OVERLAY ═══ -->
+<div class="quiz-overlay" id="quizOverlay">
+  <div class="quiz-box">
+    <h2>🧠 Quick Quiz!</h2>
+    <div class="quiz-sub">Answer correctly to earn +10 bonus points and unlock your next ads!</div>
+    <div class="q-text" id="qText">Loading...</div>
+    <div class="q-opts" id="qOpts"></div>
+    <div class="q-result" id="qResult"></div>
+    <button class="q-continue" id="qContinue" onclick="closeQuiz()">✅ Continue Watching Ads</button>
+  </div>
+</div>
+
+<!-- ═══ POINTS MODAL ═══ -->
+<div class="modal-bg" id="ptsModal">
+  <div class="modal">
+    <button class="m-close" onclick="closeModal('ptsModal')">✕</button>
+    <div style="font-size:2.8rem;margin-bottom:7px">⭐</div>
+    <h2>Your Points</h2>
+    <div class="m-pts" id="mPts">0</div>
+    <div class="m-ghs" id="mGhs">GH₵0.00</div>
+    <p>You need <strong style="color:var(--gold)" id="mNeeded">1,500</strong> more points to withdraw <strong style="color:var(--green)">GH₵10.00</strong>!<br>Watch up to 20 ads/day with 3-min cooldowns between each.</p>
+    <button class="btn-gold" onclick="closeModal('ptsModal')">🚀 Keep Earning!</button>
+  </div>
+</div>
+
+<!-- ═══ WITHDRAW MODAL ═══ -->
+<div class="modal-bg" id="wdModal">
+  <div class="modal">
+    <button class="m-close" onclick="closeModal('wdModal')">✕</button>
+    <div style="font-size:2.8rem;margin-bottom:7px">💵</div>
+    <h2>Withdrawal</h2>
+    <div class="m-pts" id="wdPts">0</div>
+    <p id="wdMsg">Keep watching ads to reach 1,500 points!</p>
+    <div class="m-info">
+      💳 Paid to MTN MoMo, Vodafone Cash, AirtelTigo or Bank Account<br>
+      ⏰ Processed within 24–48 hours after request<br>
+      📋 Full registration required to withdraw<br>
+      ✅ Minimum: 1,500 pts = GH₵10.00
+    </div>
+    <button class="btn-gold" id="wdBtn" onclick="closeModal('wdModal')">👍 Got It!</button>
+  </div>
+</div>
+
+<script>
+// ── STATE ──
+let pts = 0, adsToday = 0, totalAdsDone = 0;
+const MAX_ADS = 20, COOLDOWN = 180, AD_DUR = 30, GOAL = 1500;
+const GHS_RATE = 10 / 1500;
+let watching = false, cooling = false, quizAnswered = false;
+let adInterval = null, cdInterval = null, floatClaimed = false, curFloatPts = 0;
+
+// ── STARS ──
+const starEl = document.getElementById('stars');
+for(let i=0;i<110;i++){
+  const s=document.createElement('div');s.className='star';
+  const sz=Math.random()*2.4+.5;
+  s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${(Math.random()*4+2).toFixed(1)}s;--o:${(Math.random()*.7+.3).toFixed(2)};animation-delay:${(Math.random()*4).toFixed(1)}s`;
+  starEl.appendChild(s);
+}
+
+// ── COINS ──
+const coinEl=document.getElementById('coins');
+['🪙','💰','⭐','💎','🎯','🎮','📚','🔢','🇬🇭','💵'].forEach((e,i)=>{
+  const c=document.createElement('div');c.className='coin';c.textContent=e;
+  c.style.cssText=`top:${Math.random()*78+12}%;left:${Math.random()*88+6}%;--cd:${(Math.random()*4+4).toFixed(1)}s;--cd2:${(Math.random()*4).toFixed(1)}s`;
+  coinEl.appendChild(c);
+});
+
+// ── UPDATE ALL UI ──
+function updateUI(){
+  document.getElementById('navPts').textContent=pts.toLocaleString();
+  // dashboard header
+  document.getElementById('dbHdrPts').innerHTML=pts.toLocaleString()+' <span>pts</span>';
+  document.getElementById('dbBig').textContent=pts.toLocaleString();
+  const need=Math.max(0,GOAL-pts);
+  document.getElementById('dbSmall').textContent=pts>=GOAL?'🎉 Ready to withdraw GH₵10!':need.toLocaleString()+' pts to GH₵10 withdrawal 💰';
+  document.getElementById('dbPtsBar').style.width=Math.min(100,(pts/GOAL)*100)+'%';
+  document.getElementById('dbAdsToday').textContent=adsToday;
+  document.getElementById('dbAdsBar').style.width=Math.min(100,(adsToday/MAX_ADS)*100)+'%';
+  document.getElementById('dbGhs').textContent='GH₵'+(pts*GHS_RATE).toFixed(2);
+  // badges
+  let b='<span class="bdg">STARTER</span>';
+  if(pts>=300) b+='<span class="bdg">BRONZE</span>';
+  if(pts>=750) b+='<span class="bdg">SILVER</span>';
+  if(pts>=1500) b+='<span class="bdg" style="color:var(--green);border-color:var(--green)">GOLD ✓</span>';
+  document.getElementById('dbBadges').innerHTML=b;
+  if(pts>=GOAL){
+    document.getElementById('dbWdSt').textContent='✅ Ready!';
+    document.getElementById('dbWdSt').style.color='var(--green)';
+    document.getElementById('dbWdNote').textContent='Withdraw your GH₵10 now!';
+  }
+  // mini stats
+  document.getElementById('msTotalPts').textContent=pts.toLocaleString();
+  document.getElementById('msAdsToday').textContent=adsToday;
+  document.getElementById('dailyTxt').textContent=adsToday+' / '+MAX_ADS+' ads';
+  document.getElementById('dailyFill').style.width=Math.min(100,(adsToday/MAX_ADS)*100)+'%';
+  // modals
+  document.getElementById('mPts').textContent=pts.toLocaleString();
+  document.getElementById('mGhs').textContent='GH₵'+(pts*GHS_RATE).toFixed(2);
+  document.getElementById('mNeeded').textContent=Math.max(0,GOAL-pts).toLocaleString();
+  document.getElementById('wdPts').textContent=pts.toLocaleString()+' pts';
+  const ready=pts>=GOAL;
+  document.getElementById('wdMsg').innerHTML=ready
+    ?'🎉 You\'ve reached 1,500 pts! Tap below to request your <strong style="color:var(--green)">GH₵10.00</strong> payout!'
+    :'You need <strong style="color:var(--red)">'+Math.max(0,GOAL-pts).toLocaleString()+'</strong> more points. Keep watching ads every day!';
+  document.getElementById('wdBtn').textContent=ready?'🎉 Request GH₵10 Payout!':'👍 Keep Grinding!';
+}
+
+// ── AD PLAYER ──
+function startAd(){
+  if(watching||cooling) return;
+  if(adsToday>=MAX_ADS){toast('⛔ Daily limit reached! Come back tomorrow.');return;}
+  watching=true;
+  let t=AD_DUR;
+  const earnPts=Math.floor(Math.random()*4)+3; // 3–6 random
+  document.getElementById('playBtn').textContent='⏸';
+  document.getElementById('playBtn').classList.add('off');
+  document.getElementById('progText').textContent='Watching — do not leave!';
+  document.getElementById('progPts').textContent='+'+earnPts+' pts on finish';
+  document.getElementById('adTimeCorner').textContent=t+'s';
+  document.getElementById('progBar').style.width='0%';
+  const ptsFlash=document.getElementById('ptsFlash');
+  ptsFlash.style.display='none';
+
+  adInterval=setInterval(()=>{
+    t--;
+    const pct=((AD_DUR-t)/AD_DUR)*100;
+    document.getElementById('progBar').style.width=pct+'%';
+    document.getElementById('adTimeCorner').textContent=t+'s';
+    if(t<=0){
+      clearInterval(adInterval);
+      finishAd(earnPts);
+    }
+  },1000);
+}
+
+function finishAd(earned){
+  watching=false;
+  adsToday++;
+  totalAdsDone++;
+  pts+=earned;
+  document.getElementById('progText').textContent='Ad complete ✅';
+  document.getElementById('progPts').textContent='';
+  const ptsFlash=document.getElementById('ptsFlash');
+  ptsFlash.textContent='+'+earned+' pts earned! ⭐';
+  ptsFlash.style.display='inline-block';
+  document.getElementById('playBtn').textContent='✅';
+  document.getElementById('adTimeCorner').textContent='Done!';
+  toast('🎉 +'+earned+' points! Ad complete!');
+  updateUI();
+
+  // Quiz every 5 ads
+  if(totalAdsDone%5===0){
+    setTimeout(showQuiz,1400);
+  } else {
+    startCooldown();
+  }
+}
+
+// ── COOLDOWN ──
+function startCooldown(){
+  cooling=true;
+  let rem=COOLDOWN;
+  document.getElementById('cdBox').classList.add('on');
+  document.getElementById('playBtn').textContent='⏳';
+  document.getElementById('playBtn').classList.add('off');
+  document.getElementById('progText').textContent='Cooldown — please wait…';
+  document.getElementById('progBar').style.width='0%';
+  function fmt(s){const m=Math.floor(s/60),sc=s%60;return m+':'+(sc<10?'0':'')+sc}
+  document.getElementById('cdTimer').textContent=fmt(rem);
+  cdInterval=setInterval(()=>{
+    rem--;
+    document.getElementById('cdTimer').textContent=fmt(rem);
+    if(rem<=0){
+      clearInterval(cdInterval);
+      cooling=false;
+      document.getElementById('cdBox').classList.remove('on');
+      document.getElementById('playBtn').textContent='▶';
+      document.getElementById('playBtn').classList.remove('off');
+      document.getElementById('progText').textContent='Ready — tap ▶ to watch next ad!';
+      document.getElementById('adTimeCorner').textContent='30s';
+    }
+  },1000);
+}
+
+// ── QUIZ ──
+const quizPool=[
+  {q:"What does CPU stand for?",o:["Central Processing Unit","Computer Power Unit","Core Program Utility","Central Program Uplink"],a:0},
+  {q:"Which of these is a programming language?",o:["Photoshop","Excel","Python","PowerPoint"],a:2},
+  {q:"What is 15 × 12?",o:["170","180","175","185"],a:1},
+  {q:"What does HTML stand for?",o:["HyperText Markup Language","High-Tech Modern Language","HyperText Modern Link","High-Transfer Markup Loader"],a:0},
+  {q:"How many sides does a hexagon have?",o:["Five","Seven","Eight","Six"],a:3},
+  {q:"What is the square root of 144?",o:["11","13","12","14"],a:2},
+  {q:"In game development, what is a 'sprite'?",o:["A drink","A 2D image/character","A coding error","A game level"],a:1},
+  {q:"What does 'www' stand for?",o:["World Wide Web","Wide World Web","World Web Wide","Web World Wide"],a:0},
+  {q:"Which is NOT a programming concept?",o:["Loop","Variable","Hashtag","Function"],a:2},
+  {q:"What is 25% of 200?",o:["40","60","50","45"],a:2},
+  {q:"Which planet is closest to the Sun?",o:["Venus","Earth","Mars","Mercury"],a:3},
+  {q:"What is 7 × 8?",o:["54","56","58","52"],a:1},
+];
+
+function showQuiz(){
+  quizAnswered=false;
+  const q=quizPool[Math.floor(Math.random()*quizPool.length)];
+  document.getElementById('qText').textContent=q.q;
+  document.getElementById('qResult').textContent='';
+  document.getElementById('qContinue').style.display='none';
+  const opts=document.getElementById('qOpts');
+  opts.innerHTML='';
+  q.o.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='q-opt';btn.textContent=opt;
+    btn.onclick=()=>answerQ(i,q.a,btn,opts);
+    opts.appendChild(btn);
+  });
+  document.getElementById('quizOverlay').classList.add('on');
+}
+
+function answerQ(chosen,correct,btn,opts){
+  if(quizAnswered)return;
+  quizAnswered=true;
+  opts.querySelectorAll('.q-opt')[correct].classList.add('right');
+  if(chosen===correct){
+    pts+=10;
+    document.getElementById('qResult').innerHTML='<span style="color:var(--green)">✅ Correct! +10 bonus points!</span>';
+    toast('🧠 Quiz passed! +10 bonus points!');
+  } else {
+    btn.classList.add('wrong');
+    document.getElementById('qResult').innerHTML='<span style="color:var(--red)">❌ Wrong! No bonus. Study harder! 📚</span>';
+  }
+  updateUI();
+  document.getElementById('qContinue').style.display='block';
+}
+
+function closeQuiz(){
+  document.getElementById('quizOverlay').classList.remove('on');
+  startCooldown();
+}
+
+// ── QUICK AD CLICKS (banners) ──
+const quickCDs={};
+function quickAd(name,p){
+  if(quickCDs[name]){toast('⏳ You already viewed this ad recently!');return;}
+  pts+=p;
+  quickCDs[name]=true;
+  setTimeout(()=>delete quickCDs[name],90000); // 90s cooldown per banner
+  toast('📺 '+name+' — +'+p+' pts earned!');
+  updateUI();
+}
+
+// ── FLOATING AD ──
+const floatAds=[
+  {ico:'🎓',title:'GhanaLearn Pro',desc:'500+ courses in coding, maths & science!',pts:5},
+  {ico:'📱',title:'MTN MoMo Promo',desc:'Send money to friends, earn bonus data!',pts:4},
+  {ico:'🛒',title:'Jumia Flash Sale',desc:'50% OFF electronics — today only in Ghana!',pts:3},
+  {ico:'🏦',title:'Fidelity Bank',desc:'Open a student account with zero fees!',pts:6},
+  {ico:'🍔',title:'Bolt Food GH',desc:'Order now, free delivery on first order!',pts:4},
+  {ico:'🏥',title:'NHIS Ghana',desc:'Register for your health insurance today!',pts:5},
+];
+let curFA=null;
+function showFA(){
+  curFA=floatAds[Math.floor(Math.random()*floatAds.length)];
+  floatClaimed=false;
+  document.getElementById('faIco').textContent=curFA.ico;
+  document.getElementById('faTitle').textContent=curFA.title;
+  document.getElementById('faDesc').textContent=curFA.desc;
+  document.getElementById('faPts').textContent='+'+curFA.pts+' pts for viewing';
+  document.getElementById('floatAd').classList.add('on');
+}
+function claimFA(){
+  if(floatClaimed||!curFA)return;
+  floatClaimed=true;
+  pts+=curFA.pts;
+  toast('📺 '+curFA.title+' — +'+curFA.pts+' pts!');
+  updateUI();
+  closeFA();
+}
+function closeFA(){document.getElementById('floatAd').classList.remove('on')}
+setTimeout(showFA,9000);
+setInterval(showFA,48000);
+
+// ── REGISTER ──
+function doRegister(){
+  const name=document.getElementById('rName').value.trim();
+  const phone=document.getElementById('rPhone').value.trim();
+  const email=document.getElementById('rEmail').value.trim();
+  const momo=document.getElementById('rMomo').value;
+  const role=document.getElementById('rRole').value;
+  const pass=document.getElementById('rPass').value;
+  if(!name||!phone||!email||!momo||!role||!pass){toast('⚠️ Please fill in all fields!');return;}
+  if(!email.includes('@')){toast('⚠️ Please enter a valid email!');return;}
+  if(phone.replace(/[\s-]/g,'').length<9){toast('⚠️ Please enter a valid Ghana phone number!');return;}
+  pts+=10; // welcome bonus
+  updateUI();
+  toast('🎉 Welcome '+name.split(' ')[0]+'! +10 welcome bonus pts! Start watching ads!');
+  ['rName','rPhone','rEmail','rPass'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('rMomo').value='';
+  document.getElementById('rRole').value='';
+  setTimeout(()=>document.getElementById('earn').scrollIntoView({behavior:'smooth'}),1600);
+}
+
+// ── TOAST ──
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('on');
+  setTimeout(()=>t.classList.remove('on'),3100);
+}
+
+// ── MODALS ──
+function openModal(id){updateUI();document.getElementById(id).classList.add('on')}
+function closeModal(id){document.getElementById(id).classList.remove('on')}
+document.querySelectorAll('.modal-bg').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('on')}));
+
+updateUI();
+</script>
+</body>
+</html>
